@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -41,6 +43,7 @@ class _MyAppState extends State<MyApp> {
                           margin: EdgeInsets.all(10),
                           color: Colors.black,
                           child: Column(
+                            // ignore: prefer_const_literals_to_create_immutables
                             children: [
                               Icon(Icons.male, size: 70, color: Colors.white),
                               Text(
