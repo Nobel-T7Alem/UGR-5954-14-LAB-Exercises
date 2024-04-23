@@ -16,14 +16,4 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/todos'));
       if (response.statusCode == 200) {
         List<Todo> todos = (json.decode(response.body) as List)
-             .map((i) => Todo.fromJson(i as Map<String, dynamic>))
-        .toList();
-        emit(TodosLoaded(todos));
-      } else {
-        emit(TodosNotLoaded());
-      }
-    } catch (e) {
-      emit(TodosNotLoaded());
-    }
-  }
-}
+            .map((i)

@@ -1,16 +1,18 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'models/todo.dart';
 
 class TodoProvider with ChangeNotifier {
-  List<dynamic> _todos = [];
+  List<Todo> _todos = [];
 
-  List<dynamic> get todos => _todos;
+  List<Todo> get todos => _todos;
 
   Future<void> fetchTodos() async {
-    final response = await http.get(Uri.parse('https://mocki.io/v1/4deedc38-4be2-4780-a78f-3c875e57e393'));
+    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/todos'));
     if (response.statusCode == 200) {
-      _todos = json.decode(response.body);
+      List<dynamic> todoJson = json.decode(response.body);
+      _todos = todoJson.map((json) => Todo.fromJson(json)).toList();
       notifyListeners();
     } else {
       throw Exception('Failed to load todos');
